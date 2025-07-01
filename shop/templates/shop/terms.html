@@ -1,0 +1,176 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Terms of Service - Crop Recommendation</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+    <link rel="stylesheet" href="{%static 'css/term.css'%}">
+</head>
+<style> 
+    
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f2f8f2;
+    color: #2c3e50;
+    margin: 0;
+    padding: 0;
+    line-height: 1.7;
+}
+.container {
+    max-width: 960px;
+    background-color: white;
+    margin: 30px auto;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 6px 15px rgba(0,0,0,0.05);
+}
+
+/* Headings */
+h1 {
+    text-align: center;
+    font-size: 34px;
+    padding: 20px 0;
+    background-color: #4caf50;
+    color: white;
+    border-radius: 12px 12px 0 0;
+    margin: 0 0 25px 0;
+    font-weight: 700;
+}
+
+h2 {
+    color: #2e7d32;
+    font-size: 22px;
+    margin-top: 35px;
+    margin-bottom: 12px;
+    font-weight: 600;
+}
+
+
+p {
+    font-size: 16px;
+    color: #333;
+    margin-bottom: 18px;
+}
+
+a {
+    color: #1a73e8;
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #2e8b57;
+    text-align: center;
+    font-size: 14px;
+    font-family:'Segoe UI',Tahoma,sans-serif;
+    color: #fff;
+    padding: 20px 0;
+    border-top: 1px solid #c8e6c9;
+    margin-top: 40px;
+    font-weight: 500;
+}
+
+/* Small text for last updated */
+.small {
+    font-size: 13px;
+    color: #fff;
+    margin-top: 30px;
+    font-style: italic;
+}
+
+@media (max-width: 600px) {
+    .container {
+        padding: 20px;
+        margin: 15px;
+    }
+    nav a {
+        display: inline-block;
+        margin: 8px 12px;
+        font-size: 14px;
+    }
+    h1 {
+        font-size: 28px;
+    }
+    h2 {
+        font-size: 20px;
+    }
+}
+
+
+</style>
+<body>
+    <header>
+        <h1>Terms of Service</h1>
+    </header>
+    <nav>
+        <a href="/shop/home/">Home</a>
+        <a href="/shop/about/">About</a>
+        <a href="/shop/service/">Services</a>
+        <a href="/shop/login/">Login</a>
+        <a href="/shop/signup/">Sign Up</a>
+        <a href="/shop/contactus/">Contact Us</a>
+    </nav>
+
+    <div class="container">
+        <h2>Introduction</h2>
+        <p>Welcome to the Crop Recommendation System (“Service”, “Website”, or “Platform”). By accessing our website or using any associated tools and services (“Services”), you agree to comply with and be legally bound by the following terms and conditions (“Terms”). These Terms apply to all users of the Website, including, but not limited to, visitors, researchers, farmers, agricultural extension officers, contributors, and developers. Your use of the Services constitutes your acceptance of these Terms.
+
+Please read these Terms carefully before using the Website. If you do not agree to the Terms, you must discontinue access and usage immediately. Continued use of the Platform confirms your acceptance of these conditions and any future revisions thereof.</p>
+<h2>Overview</h2>
+<p>The Website is managed and operated by the Crop AI Research Group (“Operator”), a collaborative initiative focused on integrating agriculture and machine learning. The Service provides agricultural recommendations, soil data insights, and related functionality.
+
+The Operator may introduce new tools or features that will also be subject to these Terms. We reserve the right to update, modify, or replace any part of these Terms at any time. It is your responsibility to check this page periodically. Continued use of the Platform after changes are posted constitutes acceptance of the new Terms. </p>
+        <h2>Use of the Service</h2>
+        <p>This Service is intended for individuals aged 16 and above. Users under the age of 16 must have consent from a parent or legal guardian. We do not knowingly collect personal data from children under the age of 13. If we become aware of such collection, we will delete the information as required by applicable data protection laws.
+
+If an educational institution uses the Platform on behalf of students, it is that institution’s duty to ensure proper consent is obtained under relevant data privacy laws. By registering accounts for students, schools confirm that they are authorized to share such information with us under applicable local or international legislation.
+
+To access certain features, users may be required to register an account. Upon registration, we may collect your name, location, email address, and agricultural data inputs. You agree not to use the Platform for unlawful purposes and to comply with all applicable laws and data-sharing requirements.
+
+Any violation of these Terms, including misuse of the Platform or unlawful activity, may result in immediate termination of your access. We reserve the right to restrict or revoke user accounts that violate system integrity, applicable laws, or community guidelines.
+
+</p>
+
+        <h2>Fair Use</h2>
+        <p>To access certain features, you may need to register. You agree to provide accurate information and keep it up to date. We respect your privacy as described in our <a href="#">Privacy Policy</a>.</p>
+
+        <h2>Data Usage</h2>
+        <p>Our crop recommendation system utilizes data collected from reputable external sources, primarily datasets obtained from Kaggle, a well-known platform for open datasets and data science competitions. This data encompasses soil properties, climatic variables, crop yields, and other relevant agricultural parameters. By leveraging this high-quality data, we train and optimize our machine learning models to provide accurate and actionable recommendations to our users.
+
+We respect user privacy and handle all personal information submitted through our platform with strict confidentiality. We do not share, sell, or distribute your personal data to third parties without your explicit consent. Aggregated and anonymized data derived from these external datasets may be used for research and continuous improvement of our services, without compromising individual privacy.</p>
+
+        <h2>Intellectual Property</h2>
+        <p>All materials provided by the Crop Recommendation System, including models, user interface elements, source code, and related content, are owned by the development team unless otherwise noted. These materials are protected by intellectual property laws.
+
+Users may access and use the materials only for personal, non-commercial purposes related to the service. Any unauthorized copying, distribution, or modification is prohibited without prior permission from the development team.</p>
+
+        <h2>Limitations</h2>
+        <p>The crop recommendations provided by our system are generated using advanced machine learning models trained on historical and real-time agricultural data. While we strive to ensure the highest level of accuracy, these recommendations cannot guarantee perfect results in every scenario due to variables such as weather fluctuations, soil conditions, and regional differences.
+
+Users are advised to use the recommendations as a helpful guide rather than an absolute directive. For critical farming decisions, it is strongly recommended to consult local agricultural experts or agronomists who can consider additional factors specific to your environment and circumstances.</p>
+
+        
+
+        <h2>Termination</h2>
+        <p>We may suspend or terminate your access to the Crop Recommendation System at our discretion if you violate any terms or misuse the service. This includes unauthorized use, security threats, or any actions harmful to the platform or other users. Suspension or termination may occur without prior notice to protect the service and its users.</p>
+
+        <h2>Governing Law</h2>
+        <p>These Terms are governed by the laws of Nepal. Any legal disputes arising from your use of the Crop Recommendation System will be resolved exclusively in the courts of Nepal. By using our service, you agree to this jurisdiction.</p>
+
+        <h2>Contact</h2>
+        <p>If you have questions about these Terms, please contact us at <a href="mailto:support@cropai.com">support@cropai.com</a>.</p>
+
+        <p class="small">Last updated: 2025-06-30</p>
+    </div>
+
+    <footer>
+        &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
+                Privacy</a>
+    </footer>
+</body>
+</html>

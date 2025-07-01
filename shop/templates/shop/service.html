@@ -1,0 +1,392 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Crop Recommendation</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+</head>
+<body>
+    <header>
+        <h1>Crop Recommendation System</h1>
+    </header>
+    <nav>
+        <a href="/shop/home/">Home</a>
+        <a href="/shop/about/">About</a>
+        <a href="/shop/service/">Services</a>
+        <a href="/shop/login/">Login</a>
+        <a href="/shop/signup/">Sign Up</a>
+        <a href="/shop/contactus/">Contact Us</a>
+    </nav>
+
+{% block body %}
+<h2 class="text-center">Crop Recommendation</h2>
+<p class="text-center">Enter soil nutrient values to get the best crop suggestion for your field.</p>
+
+<form method="post" action="/shop/service/" class="form-style">
+    {% csrf_token %}
+      <div class="wrapper">
+    <div class="container">
+      <h2 class="header">
+        Enter your soil and climate parameters to get personalized crop recommendations
+      </h2>
+      <div class="grid">
+
+        <div class="input-box">
+          <label for="N" class="label">Nitrogen (N) - kg/ha</label>
+          <input type="range" name="N"id="N" min="0" max="140" step="1" value="70" />
+          <input type="number" id="nitrogen_num" min="0" max="140" step="1" value="70" />
+          <small class="note">Soil nitrogen content (0–140 kg/ha)</small>
+        </div>
+
+        <div class="input-box">
+          <label for="P" class="label">Phosphorus (P) - kg/ha</label>
+          <input type="range" name="P"id="P" min="5" max="145" step="1" value="75" />
+          <input type="number" id="phosphorus_num" min="5" max="145" step="1" value="75" />
+          <small class="note">Soil phosphorus content (5–145 kg/ha)</small>
+        </div>
+
+        <div class="input-box">
+          <label for="K" class="label">Potassium (K) - kg/ha</label>
+          <input type="range" name= "K"id="K" min="5" max="205" step="1" value="100" />
+          <input type="number" id="potassium_num" min="5" max="205" step="1" value="100" />
+          <small class="note">Soil potassium content (5–205 kg/ha)</small>
+        </div>
+
+        <div class="input-box">
+          <label for="temperature" class="label">Temperature (°C)</label>
+          <input type="range" name="temperature"id="temperature" min="8" max="44" step="0.1" value="25" />
+          <input type="number" id="temperature_num" min="8" max="44" step="0.1" value="25" />
+          <small class="note">Average temperature (8–44 °C)</small>
+        </div>
+
+        <div class="input-box">
+          <label for="humidity" class="label">Humidity (%)</label>
+          <input type="range" name="humidity" id="humidity" min="14" max="100" step="0.1" value="50" />
+          <input type="number" id="humidity_num" min="14" max="100" step="0.1" value="50" />
+          <small class="note">Relative humidity (14–100%)</small>
+        </div>
+
+        <div class="input-box">
+          <label for="PH" class="label">pH Value</label>
+          <input type="range" name="PH" id="ph" min="3.5" max="10" step="0.1" value="6.5" />
+          <input type="number" id="ph_num" min="3.5" max="10" step="0.1" value="6.5" />
+          <small class="note">Soil pH level (3.5–10)</small>
+        </div>
+
+        <div class="input-box">
+          <label for="rainfall" class="label">Rainfall (mm)</label>
+          <input type="range" name="rainfall" id="rainfall" min="20" max="300" step="1" value="100" />
+          <input type="number" id="rainfall_num" min="20" max="300" step="1" value="100" />
+          <small class="note">Annual rainfall (20–300 mm)</small>
+        </div>
+      </div>
+
+ <button type="submit">Get Recommendation</button>
+
+      <div id="result" class="result" style="display:none;">
+        🌿 <strong>Recommended Crop:</strong> <span id="cropName"></span>
+      </div>
+
+      <div id="error" class="error" style="display:none;"></div>
+    </div>
+  </div>
+
+  <script>
+    // Sync slider and number inputs
+    function syncInputs(rangeId, numberId) {
+      const range = document.getElementById(rangeId);
+      const number = document.getElementById(numberId);
+
+      range.addEventListener('input', () => {
+        number.value = range.value;
+      });
+
+      number.addEventListener('input', () => {
+        let val = Number(number.value);
+        if (val < range.min) val = range.min;
+        if (val > range.max) val = range.max;
+        number.value = val;
+        range.value = val;
+      });
+    }
+
+    // Sync all inputs
+    syncInputs('nitrogen', 'nitrogen_num');
+    syncInputs('phosphorus', 'phosphorus_num');
+    syncInputs('potassium', 'potassium_num');
+    syncInputs('temperature', 'temperature_num');
+    syncInputs('humidity', 'humidity_num');
+    syncInputs('ph', 'ph_num');
+    syncInputs('rainfall', 'rainfall_num');
+
+    // Simple dummy recommendation logic
+    document.getElementById('submitBtn').addEventListener('click', () => {
+      const ph = parseFloat(document.getElementById('ph').value);
+      const resultDiv = document.getElementById('result');
+      const errorDiv = document.getElementById('error');
+      const cropName = document.getElementById('cropName');
+
+      resultDiv.style.display = 'none';
+      errorDiv.style.display = 'none';
+
+      // Simple condition example
+      if (ph < 5) {
+        cropName.textContent = 'Rice';
+        resultDiv.style.display = 'block';
+      } else if (ph >= 5 && ph <= 7) {
+        cropName.textContent = 'Wheat';
+        resultDiv.style.display = 'block';
+      } else if (ph > 7) {
+        cropName.textContent = 'Maize';
+        resultDiv.style.display = 'block';
+      } else {
+        errorDiv.textContent = 'Invalid input.';
+        errorDiv.style.display = 'block';
+      }
+
+    });
+  </script>
+  
+
+    {% comment %} <input type="hidden" name="itemsJson" id="itemJson"> {% endcomment %}
+    {% comment %} <label for="N">Nitrogen (N):</label>
+    <input type="number" name="N" id="N" step="any" required>
+
+    <label for="P">Phosphorus (P):</label>
+    <input type="number" name="P" id="P" step="any" required>
+
+    <label for="K">Potassium (K):</label>
+    <input type="number" name="K" id="K" step="any" required>
+
+     <label for="PH">Soil pH:</label>
+    <input type="number" step="any" name="pH" max='14' min='0' required />
+
+    <label for="temperature">Temperature(°C):</label>
+    <input type="number" step="any" name="temperature" required />
+
+    <label for="humidity">Humidity(mm):</label>
+    <input type="number" step="any" name="humidity" required />
+
+    <label for="rainfall">Rainfall:</label>
+    <input type="number" name="rainfall" id="rainfall" required>
+
+    <button type="submit">Get Recommendation</button> {% endcomment %}
+</form>
+
+{% comment %} {% if crop %} {% endcomment %}
+    <div class="result-box">
+        <h3>🌾 Recommended Crop: <strong>{{ crop }}</strong></h3>
+    </div> 
+{% comment %} {% endif %} {% endcomment %}
+
+<style>
+
+/* Wrapper styles */
+.wrapper {
+  background-image: url({%static "shop/agricl.png"%});
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 100vh;
+  padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Container box */
+.container {
+  padding: 2rem;
+  font-family: Arial, sans-serif;
+  max-width: 850px;
+  width: 100%;
+  background-color: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+/* Header */
+.header {
+  text-align: center;
+  color: #065f46;
+  margin-bottom: 2rem;
+}
+
+/* Grid container for inputs */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Individual input box */
+.input-box {
+  background-color: #fff;
+  padding: 1rem;
+  border-radius: 8px;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+}
+
+/* Label styling */
+.label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+/* Slider input */
+input[type="range"] {
+  width: 100%;
+  margin: 0;
+}
+
+/* Number input */
+input[type="number"] {
+  width: 100%;
+  padding: 0.5rem;
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  box-sizing: border-box;
+}
+
+/* Note text */
+.note {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: 0.85rem;
+  color: #6b7280;
+}
+
+/* Button */
+.button {
+  margin-top: 2rem;
+  background-color: #16a34a;
+  color: #fff;
+  padding: 1rem 2rem;
+  border: none;
+  border-radius: 8px;
+  font-size: 1.1rem;
+  cursor: pointer;
+  display: block;
+  width: 100%;
+  max-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* Result box */
+.result {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #1e3a8a;
+  font-size: 1.2rem;
+  background-color: #d1fae5;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #065f46;
+}
+
+/* Error box */
+.error {
+  margin-top: 1.5rem;
+  text-align: center;
+  color: #b91c1c;
+  font-size: 1rem;
+  background-color: #fee2e2;
+  padding: 1rem;
+  border-radius: 8px;
+  border: 1px solid #dc2626;
+}
+
+
+
+
+    
+{% comment %}     
+    header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+header h1 {
+    background-color: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    font-size: 32px;
+}
+    .form-style {
+        max-width: 500px;
+        margin: 40px auto;
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    label {
+        font-weight: bold;
+    }
+
+    input {
+        padding: 10px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+    }
+
+    button {
+        padding: 12px;
+        background-color: #228B22;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #1e7e34;
+    }
+
+    .result-box {
+        margin: 30px auto;
+        padding: 20px;
+        max-width: 500px;
+        background: #e6ffe6;
+        border: 2px solid #a0dca0;
+        border-radius: 10px;
+        text-align: center;
+    }
+
+    h2, p {
+        text-align: center;
+    }
+    footer {
+    background-color: #2e8b57;
+    color: white;
+    text-align: center;
+    padding: 10px 20px;
+    font-size: 14px;
+    margin-top: 5px;
+    width: 100%;
+    left:0;
+    bottom:0;
+    box-shadow: 0 -2px 6px rgba(0, 0, 0, 0.1); {% endcomment %}
+}
+</style>
+<footer>
+        &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
+                Privacy</a>
+    </footer>
+{% endblock %}
+
+
+
+
+{% comment %} 
+<label for="K">Potassium (K):</label>
+    <input type="number" name="K" id="K" step="any" required> {% endcomment %}

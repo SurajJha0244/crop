@@ -1,0 +1,178 @@
+{% comment %} {%extends 'shop/basic.html'%} {% endcomment %}
+
+{% comment %} {%block title%} Login page {%endblock%} {% endcomment %}
+{%block body%}
+{% load static%}
+<style>
+     * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    body, html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      background-image: url({%static "shop/agricl.png"%}); /* Replace with your farm image */
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .login-container {
+      background: rgba(0, 100, 0, 0.85);
+      padding: 30px 40px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.3);
+      color: #fff;
+      width: 350px;
+      text-align: center;
+    }
+
+    .login-container h1 {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .login-container p {
+      font-size: 14px;
+      margin-bottom: 20px;
+    }
+
+    .login-container input {
+      width: 100%;
+      padding: 10px 15px;
+      margin: 10px 0;
+      border-radius: 8px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+    }
+
+    .login-container button {
+      width: 100%;
+      padding: 10px;
+      border: none;
+      background-color: #004d00;
+      color: #fff;
+      font-size: 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background 0.3s;
+      margin-top: 10px;
+    }
+
+    .login-container button:hover {
+      background-color: #007e00;
+    }
+
+    .login-container a {
+      display: block;
+      color: #ddd;
+      margin-top: 10px;
+      font-size: 14px;
+      text-decoration: none;
+    }
+
+    .login-container a:hover {
+      text-decoration: underline;
+    }
+
+    .create-account {
+      margin-top: 15px;
+      background-color: #ffffff33;
+      padding: 10px;
+      border-radius: 8px;
+      color: #fff;
+      display: inline-block;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    .create-account:hover {
+      background-color: #ffffff55;
+    }
+footer {
+    background-color: #2e8b57;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+}
+</style>
+
+{% if messages %}
+<ul style="list-style:none; padding:0;">
+  {% for message in messages %}
+  <li style="padding: 10px; margin-bottom: 10px; 
+                 border-radius: 5px;
+                 color: white;
+                 background-color: 
+                   {% if message.tags == 'success' %}green
+                   {% elif message.tags == 'error' %}red
+                   {% else %}gray
+                   {% endif %};">
+    {{ message }}
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+  <div class="login-background">
+    <div class="login-container">
+      <div class="login-left">
+        <h1 class="nepali-text">हाम्रो कृषि</h1>
+        <p>Welcome to Hamro Krishi</p>
+      </div>
+
+      <form class="modal-content animate" method="post" action="/shop/login/">
+        {% csrf_token %}
+        <input type="text" placeholder="Username" required name="loginusername" id="loginusername" />
+        <input type="password" placeholder="Password" id="loginpassword" name="loginpassword" required />
+        <a href="#" class="forgot-password">Forgot Password?</a>
+        <button type="submit" class="login-btn">Login</button>
+        <a href="/shop/signup/" class="create-account-btn"
+          >
+          Create an Account
+        </a>
+        {% comment %}
+        <div class="container">
+          <label for="uname"><b>Username</b></label>
+          <input type="text" placeholder="Enter Username" id="loginusername" name="loginusername" required>
+
+          <label for="psw"><b>Password</b></label>
+          <input type="password" placeholder="Enter Password" id="loginpassword" name="loginpassword" required>
+
+          <button type="submit">Login</button>
+          <label>
+            <input type="checkbox" checked="checked" name="remember"> Remember me
+          </label>
+        </div>
+
+        <div class="container" style="background-color:#f1f1f1">
+          <button type="button" href="/shop/login" onclick="document.getElementById('id01').style.display='none'"
+            class="cancelbtn">Cancel</button>
+          <span class="psw">Forgot <a href="#">password?</a></span>
+        </div> {% endcomment %}
+      </form>
+    </div>
+  </div>
+  <footer>
+        &copy; 2025 Crop AI. All rights reserved.
+    </footer>
+  {%endblock%}
+
+
+
+
+
+
+

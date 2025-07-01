@@ -1,0 +1,91 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Home - Crop Recommendation</title>
+    <link rel="stylesheet" href="{% static 'css/base.css' %}">
+</head>
+<style> 
+ body {
+    font-family: 'Segoe UI', Tahoma, sans-serif;
+    background-color: #f2f8f2;
+    margin: 0;
+    padding: 0;
+    color: #2c3e50;
+    line-height: 1.6;
+}
+.container {
+    max-width: 900px;
+    background: #ffffff;
+    margin: 5px auto;
+    padding: 30px 40px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+h2 {
+    color: #2e7d32;
+    margin-top: 25px;
+    font-size: 22px;
+}
+
+p {
+    margin-bottom: 16px;
+    font-size: 16px;
+    color: #333;
+}
+
+</style>
+<body>
+    {% block body %}
+    <header>
+        <h1>Crop Recommendation System</h1>
+    </header>
+    <nav>
+        <a href="/shop/home/">Home</a>
+        <a href="/shop/about/">About</a>
+        <a href="/shop/service/">Services</a>
+        <a href="/shop/login/">Login</a>
+        <a href="/shop/signup/">Sign Up</a>
+        <a href="/shop/contactus/">Contact Us</a>
+    </nav>
+    <div class="container">
+        <section>
+            <h2>Who We Are</h2>
+            <p>
+                We are a multidisciplinary team of researchers, software developers, and agricultural professionals committed to enhancing decision-making in farming through the use of advanced technologies. The Crop Recommendation System is a product of collaboration between experts in artificial intelligence, agronomy, and environmental sciences who share a common goal: to simplify and improve agricultural planning using data-driven insights.
+            </p>
+        </section>
+
+        <section>
+            <h2>Our Mission</h2>
+            <p>
+                Our mission is to promote smart, sustainable agriculture by equipping farmers with accurate and timely crop recommendations. We aim to bridge the gap between traditional farming practices and modern technologies by delivering tools that are both accessible and reliable. Through our system, we strive to reduce uncertainty in crop selection and help farmers increase yield, conserve resources, and contribute to long-term food security.
+            </p>
+        </section>
+
+        <section>
+            <h2>What We Do</h2>
+            <p>
+                The Crop Recommendation System uses machine learning algorithms trained on verified agricultural datasets to provide crop suggestions based on user inputs such as soil type, nutrient levels, and weather conditions. Our platform processes this information and generates tailored crop recommendations to optimize land usage. By harnessing real-world data from sources like Kaggle and local agricultural studies, we ensure that our recommendations are both practical and relevant
+            </p>
+        </section>
+<section> 
+    <h2>Our Vision </h2>
+    <p> We envision a future where every farmer—regardless of location or resources—has access to intelligent, affordable, and easy-to-use technology that enhances productivity and ensures food security. Through innovation and research, we aspire to support a global agricultural system that is environmentally responsible and economically viable.</p>
+</section>
+        <section>
+            <h2>Our Team</h2>
+            <p>
+                Our multidisciplinary team brings together experience in machine learning, agricultural science, and 
+                full-stack development. We are committed to delivering simple yet powerful tools to farmers everywhere.
+            </p>
+        </section>
+    </div>
+    <footer>
+        &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
+                Privacy</a>
+    </footer>
+    {% endblock %}
+</body>
+</html>
