@@ -1,18 +1,17 @@
 from django.shortcuts import render,redirect
 from django.http import HttpResponse
 from django.conf import settings
-from .models import product,contact,Crop_Recommend
+from .models import product,contact,crop_recommend
 from django.contrib.auth.models import User
+from django.contrib.auth.decorators import login_required
 from django.contrib.auth import authenticate,login as ln,logout
 from django.contrib import messages
-import joblib,os, numpy as np
-model_path = os.path.join(settings.BASE_DIR, 'shop', 'static', 'decision_tree_model.pkl')
-model = joblib.load(model_path)
+import joblib,os, numpy as np,json
+
 def index(request):
     return render(request,'shop/index.html')
 
 def about(request):
-    # return render('request','shop/index.html')
     return render(request,'shop/about.html')
 
 def home(request):
@@ -23,6 +22,11 @@ def terms(request):
 
 def result(request):
     return render(request,'shop/result.html')
+
+@login_required
+def recommendation_history(request):
+    history = crop_recommend.objects.filter(user=request.user).order_by('-timestamp')
+    return render(request, 'shop/history.html', {'history': history})
 
 def user_contact(request):
     if request.method =="POST":
@@ -35,70 +39,66 @@ def user_contact(request):
         ncontact.save()
     return render(request,'shop/contactus.html')
 
-def Crop_recommend(request):
-    import os
-import numpy as np
-import joblib
-from django.shortcuts import render
-from django.conf import settings
 
+MODEL_PATH = os.path.join(settings.BASE_DIR, 'models', 'model.pkl')
+SCALER_PATH = os.path.join(settings.BASE_DIR, 'models', 'scaler.pkl')
+LABEL_ENCODER_PATH = os.path.join(settings.BASE_DIR, 'models', 'label_encoder.pkl')
+
+model = joblib.load(MODEL_PATH)
+scaler = joblib.load(SCALER_PATH)
+label_encoder = joblib.load(LABEL_ENCODER_PATH)
+
+@login_required
 def Crop_recommend(request):
+    crop = None
+    history = crop_recommend.objects.filter(user=request.user).order_by('-timestamp')
     if request.method == 'POST':
         try:
-            # Extract inputs and convert to float
-            nitrogen = float(request.POST.get('N', 0))
-            phosphorus = float(request.POST.get('P', 0))
-            potassium = float(request.POST.get('K', 0))
-            temperature = float(request.POST.get('temperature', 0))
-            humidity = float(request.POST.get('humidity', 0))
-            ph = float(request.POST.get('pH', 0))
-            rainfall = float(request.POST.get('rainfall', 0))
+            
+            N = float(request.POST.get('N'))
+            P = float(request.POST.get('P'))
+            K = float(request.POST.get('K'))
+            temperature = float(request.POST.get('temperature'))
+            humidity = float(request.POST.get('humidity'))
+            pH = float(request.POST.get('pH'))
+            rainfall = float(request.POST.get('rainfall'))
 
-            input_data = np.array([[nitrogen, phosphorus, potassium, temperature, humidity, ph, rainfall]])
+            features = [[N, P, K, temperature, humidity, pH, rainfall]]
+            features_scaled = scaler.transform(features)
 
-            # Load the model
-            model_path = os.path.join(settings.BASE_DIR, 'shop', 'static', 'decision_tree_model.pkl')
-            model = joblib.load(model_path)
-
-            # Load the label encoder
-            encoder_path = os.path.join(settings.BASE_DIR, 'shop', 'static', 'label_encoder.pkl')
-            label_encoder = joblib.load(encoder_path)
-
-            # Predict the label number
-            predicted_label_num = model.predict(input_data)[0]
-
-            # Inverse transform to get original crop name string
-            prediction = label_encoder.inverse_transform([predicted_label_num])[0]
-
-            return render(request, 'shop/service.html', {'crop': prediction})
+            pred_encoded = model.predict(features_scaled)[0]
+            crop = label_encoder.inverse_transform([pred_encoded])[0]
+            
+            crop_recommend.objects.create(
+            user=request.user,
+            nitrogen=N,
+            phosphorus=P,
+            potassium=K,
+            temperature=temperature,
+            humidity=humidity,
+            ph=pH,
+            rainfall=rainfall,
+            predicted_crop=crop
+        )
 
         except Exception as e:
-            return render(request, 'shop/service.html', {'error': str(e)})
-
-    return render(request, 'shop/service.html')
-
-
-
-    # if request.method == "POST":
-    #     N = float(request.POST.get('N', 0))
-    #     P = float(request.POST.get('P', 0))
-    #     K = float(request.POST.get('K', 0))
-    #     rainfall = float(request.POST.get('rainfall', 0))
-    #     ph = float(request.POST.get('pH', 0)) 
-    #     temperature = float(request.POST.get('temperature', 25))  
-    #     humidity = float(request.POST.get('humidity', 50))  
+            crop = f"Error: {e}"
+            
         
-    #     Crop_Recommend.objects.create(
-    #         Nitrogen=N,
-    #         Phosphorus=P,
-    #         Potassium=K,
-    #         Rainfall=rainfall,
-    #         pH=ph 
-    #     )
 
-    #     return render(request, 'shop/service.html', {'result': 'Data saved successfully'})
-    
-    # return render(request, 'shop/service.html')
+    context = {
+        'crop': crop,
+        'N': request.POST.get('N', 60),
+        'P': request.POST.get('P', 30),
+        'K': request.POST.get('K', 30),
+        'temperature': request.POST.get('temperature', 25),
+        'humidity': request.POST.get('humidity', 50),
+        'pH': request.POST.get('pH', 6.5),
+        'rainfall': request.POST.get('rainfall', 100),
+        'history': history
+    }
+    return render(request, 'shop/service.html', context)
+
 
 
 def user_login(request):
@@ -109,11 +109,11 @@ def user_login(request):
         
         if user is not None:
             ln(request,user)
-            messages.success(request,"successfully logged in.")
-            return redirect('shop:home')
+            messages.success(request,"Successfully Logged In. Welcome!!")
+            return redirect('/shop/home/')
         else:
-            messages.error(request,'invalid credecntials.')
-            return redirect('login')
+            messages.error(request,'Invalid Credentials. Please Enter Valid Credentials.')
+            return redirect('/shop/login/')
     return render(request,'shop/login.html')  
 
 def user_logout(request):
@@ -148,7 +148,7 @@ def user_signup(request):
         return redirect('shop:home')
     else:
         return render(request, 'shop/signup.html')
-        # return HttpResponse("404- Not found")          
+          
       
     
 

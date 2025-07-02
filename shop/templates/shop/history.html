@@ -1,0 +1,329 @@
+{%load static%}
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <title>Home - Crop Recommendation</title>
+    <link rel="stylesheet" href="/static/css/base.css">
+</head>
+<style> 
+body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+            background-color: #f9f9f9;
+            color: #2c3e50;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+       header h1 {
+    background-color: #2e7d32;
+    color: white;
+    padding: 20px;
+    text-align: center;
+    margin: 0;
+    font-size: 32px;
+}
+
+ header {
+      background-color: #2e7d32;
+      color: white;
+      padding: 10px 0;
+      text-align: center;
+      font-size: 2rem;
+      font-weight: bold;
+      left:0;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    }
+footer {
+    background-color: #2e8b57;
+    color: white;
+    text-align: center;
+    padding: 10px;
+    width: 100%;
+    position: relative;
+    bottom: 0;
+    margin-top: 10px;
+}
+  
+footer p{
+  margin:0;
+  letter-spacing:0.5px;
+}
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #4caf50;
+            padding: 10px 0;
+            width: 100%;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 7px 20px;
+            margin: 0 10px;
+            font-weight: 500;
+            transition: background 0.3s ease;
+        }
+
+        nav a:hover {
+            background-color: #388e3c;
+            border-radius: 4px;
+        }
+
+        footer {
+            background-color: #2e8b57;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            width: 100%;
+            position: relative;
+            bottom: 0;
+            margin-top: 10px;
+        }
+
+        .container {
+            background: #fff;
+            padding: 30px 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+            max-width: 900px;
+            width: 95%;
+            margin: 30px auto;
+        }
+
+        /* History Section */
+        #historyBox {
+            margin-top: 20px;
+        }
+
+        #historyBox h3 {
+            font-size: 1.8rem;
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 15px;
+            letter-spacing: 0.02em;
+            text-align: center;
+        }
+
+        table.history-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+            border-radius: 10px;
+            overflow: hidden;
+            font-size: 0.95rem;
+        }
+
+        .history-table thead tr {
+            background-color: #4caf50;
+            color: white;
+            font-weight: 700;
+            text-align: center;
+            font-size: 1rem;
+        }
+
+        .history-table thead th {
+            padding: 14px 12px;
+            border-bottom: none;
+        }
+
+        .history-table tbody tr {
+            background-color: #f9f9f9;
+            transition: background-color 0.25s ease;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+            border-radius: 8px;
+        }
+
+        .history-table tbody tr:hover {
+            background-color: #d0e8d0;
+        }
+
+        .history-table tbody td {
+            text-align: center;
+            padding: 14px 12px;
+            color: #555;
+            border: none;
+        }
+
+        .history-table tbody tr td:first-child {
+            border-top-left-radius: 8px;
+            border-bottom-left-radius: 8px;
+        }
+
+        .history-table tbody tr td:last-child {
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+            font-weight: 600;
+            color: #4caf50;
+        }
+        nav .welcome-user {
+  position: absolute;
+  right: 20px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  font-style: bold;
+  user-select: none;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+nav .welcome-user:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #e0f2f1;
+  cursor: pointer;
+}
+</style>
+<body>
+    
+    <header>
+        <h1>Crop Recommendation System</h1>
+    </header>
+    <nav>
+        <a href="/shop/home/">Home</a>
+        <a href="/shop/about/">About</a>
+        <a href="/shop/service/">Services</a>
+        <a href="/shop/contactus/">Contact Us</a>
+        <a href="/shop/login/">Log Out</a>
+        {%if user.is_authenticated%}
+        <span class="welcome-user">Welcome {{ request.user.username }}</span>
+        {%endif%}
+    </nav>
+{% if history %}
+  <div id="historyBox" style="margin-top: 20px;">
+    <h3>📜 Your Past Crop Recommendations</h3>
+    <table border="1" cellpadding="10" style="border-collapse: collapse; width: 100%; max-width: 900px;">
+      <thead style="background-color: #f2f2f2;">
+        <tr>
+          <th>Date</th>
+          <th>N</th>
+          <th>P</th>
+          <th>K</th>
+          <th>Temp (°C)</th>
+          <th>Humidity (%)</th>
+          <th>pH</th>
+          <th>Rainfall (mm)</th>
+          <th>Crop</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for item in history %}
+        <tr>
+          <td>{{ item.timestamp|date:"Y-m-d H:i" }}</td>
+          <td>{{ item.nitrogen }}</td>
+          <td>{{ item.phosphorus }}</td>
+          <td>{{ item.potassium }}</td>
+          <td>{{ item.temperature }}</td>
+          <td>{{ item.humidity }}</td>
+          <td>{{ item.ph }}</td>
+          <td>{{ item.rainfall }}</td>
+          <td><strong>{{ item.predicted_crop }}</strong></td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <style>
+     body, html {
+      height: 100%;
+      width: 100%;
+    }
+
+    body {
+      backgroundcolor: #f2f8f2;
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+   .historyBox {
+      margin-top: 30px;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    /* Heading */
+    .historyBox h3 {
+      font-size: 1.5rem;
+      margin-bottom: 15px;
+      color: #333;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+
+    /* Table styles */
+    .history-table {
+      width: 100%;
+      border: 2px solid #007BFF;
+      max-width: 900px;
+      border-collapse: separate;
+      border-spacing: 0 8px; /* spacing between rows */
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+      background-color: #fff;
+    }
+
+    /* Header */
+    .history-table thead tr {
+      background-color: #007BFF; /* Bootstrap primary blue */
+      color: #fff;
+      text-align: center;
+      font-weight: 700;
+      font-size: 0.95rem;
+      border-radius: 8px 8px 0 0;
+    }
+
+    .history-table thead th {
+      padding: 12px 15px;
+      border-bottom: none;
+    }
+
+    /* Body rows */
+    .history-table tbody tr {
+      background-color: #f9f9f9;
+      transition: background-color 0.3s ease;
+      box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+      border-radius: 6px;
+    }
+
+    .history-table tbody tr:hover {
+      background-color: #e6f0ff;
+    }
+
+    /* Cells */
+    .history-table tbody td {
+      text-align: center;
+      padding: 12px 15px;
+      font-size: 0.9rem;
+      color: #555;
+      border: none;
+    }
+
+    /* Rounded corners for first and last cells in a row */
+    .history-table tbody tr td:first-child {
+      border-top-left-radius: 6px;
+      border-bottom-left-radius: 6px;
+    }
+    .history-table tbody tr td:last-child {
+      border-top-right-radius: 6px;
+      border-bottom-right-radius: 6px;
+      font-weight: 600;
+      color: #007BFF;
+    }
+  </style>
+{% endif %}
+<footer>
+            &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
+                Privacy</a>
+        </footer>

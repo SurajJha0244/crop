@@ -15,5 +15,6 @@ urlpatterns = [
     path('logout/', views.user_logout ,name="logout"),
     path('terms/', views.terms ,name="terms"),
     path('result/', views.result ,name="result"),
+    path('history/', views.recommendation_history, name='history'),
     
 ]

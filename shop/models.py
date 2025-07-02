@@ -1,5 +1,6 @@
 from django.db import models
-
+from django.utils import timezone
+from django.contrib.auth.models import User
 # Create your models here.
 class product(models.Model):
     product_id=models.AutoField
@@ -26,15 +27,34 @@ class contact(models.Model):
     def __str__(self):
         return self.name
     
-class Crop_Recommend(models.Model):
+# class Crop_Recommend(models.Model):
+#     user = models.ForeignKey(User, on_delete=models.CASCADE,null=True, blank=True)
+#     recommend_id=models.AutoField(primary_key=True)
+#     nitrogen = models.FloatField(default=0.0)
+#     phosphorus = models.FloatField(default=0.0)
+#     potassium = models.FloatField(default=0.0)
+#     temperature = models.FloatField(default=0.0)
+#     humidity = models.FloatField(default=0.0)
+#     ph = models.FloatField(default=0.0)
+#     rainfall = models.FloatField(default=0.0)
+#     predicted_crop = models.CharField(max_length=50 ,default='')
+#     timestamp = models.DateTimeField(default=timezone.now)
+    
+#     def __str__(self):
+#         return str(self.predicted_crop)
+    
+class crop_recommend(models.Model):
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     recommend_id=models.AutoField(primary_key=True)
-    Nitrogen=models.FloatField()
-    Phosphorus=models.FloatField()
-    Potassium=models.FloatField()
-    Rainfall=models.FloatField()
-    pH = models.FloatField()
-    temperature=models.FloatField(default=0.0)
-    humidity=models.FloatField(default=0.0)
+    nitrogen = models.FloatField(default=0.0)
+    phosphorus = models.FloatField(default=0.0)
+    potassium = models.FloatField(default=0.0)
+    temperature = models.FloatField(default=0.0)
+    humidity = models.FloatField(default=0.0)
+    ph = models.FloatField(default=0.0)
+    rainfall = models.FloatField(default=0.0)
+    predicted_crop = models.CharField(max_length=50 ,default='')
+    timestamp = models.DateTimeField(default=timezone.now)
     
     def __str__(self):
-        return str(self.recommend_id)
+        return str(self.predicted_crop)

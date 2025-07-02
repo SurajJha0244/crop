@@ -3,9 +3,13 @@
 <html>
 
 <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>Home - Crop Recommendation</title>
     <link rel="stylesheet" href="/static/css/base.css">
 </head>
+
+
 <style>
     .welcome-container {
         background-color: #ffffff;
@@ -35,7 +39,7 @@
     }
     .btn-primary {
     padding: 0.75rem 2rem;
-    background-color: #16a34a;
+    background-color:rgb(23, 141, 64);
     color: white;
     border-radius: 10px;
     font-size: 1rem;
@@ -44,9 +48,218 @@
     margin-up:5px;
     text-decoration: none;
 }
+nav .welcome-user {
+  position: absolute;
+  right: 20px;
+  color: #fff;
+  font-weight: 600;
+  font-size: 1rem;
+  font-style: bold;
+  user-select: none;
+  white-space: nowrap;
+  padding: 5px 10px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease, color 0.3s ease;
+  cursor: default;
+}
+nav .welcome-user:hover {
+  background-color: rgba(255, 255, 255, 0.15);
+  color: #e0f2f1;
+  cursor: pointer;
+}
+{% comment %} aaja 18 {% endcomment %}
+.hero-container {
+    position: relative;
+    height: 500px;
+    background-image: url({%static "shop/agricl.png"%}); /* Ensure crop.jpg is inside static/images/ */
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
 
+.text-overlay {
+    background-color: rgba(45, 153, 74, 0.49);
+    padding: 30px 60px;
+    border-radius: 10px;
+    color: white;
+}
 
-    
+.subheading {
+    font-size: 30px;
+    letter-spacing: 3px;
+    margin: 0;
+}
+
+.heading {
+    font-size: 50px;
+    font-weight: bold;
+    letter-spacing: 5px;
+    margin: 10px 0 0;
+    color:  rgba(3, 241, 63, 0.99)
+}
+   body {
+    font-family: 'Segoe UI', sans-serif;
+    background-color: #f9f9f9;
+    padding: 20px;
+    margin: 0;
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+.highlight {
+    color: #f68b1e;
+}
+
+.subtitle {
+    text-align: center;
+    color: #777;
+    margin-bottom: 40px;
+}
+
+.container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 10px;
+    padding: 20px;
+    width: 260px;
+    box-shadow: 0 2px 8px rgba(114, 250, 36, 0.1);
+    text-align: center;
+    transition: 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+}
+
+.card h2 {
+    font-size: 18px;
+    color: #222;
+    margin-bottom: 10px;
+}
+
+.card p {
+    font-size: 14px;
+    color: #666;
+}
+{% comment %} footer {% endcomment %}
+
+  /* Footer main container */
+.footer {
+  background-color: rgb(225, 243, 225);
+  padding: 40px 30px 20px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+/* Inner layout container */
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+
+/* Each footer section */
+.footer-section {
+  flex: 1 1 220px;
+  margin-bottom: 20px;
+}
+
+/* Section titles */
+.footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: rgb(3, 110, 3);
+
+}
+
+/* Paragraph text */
+.footer-text {
+  margin: 6px 0;
+  font-size: 14px;
+  color: #444;
+  line-height: 1.6;
+}
+
+/* Navigation menu inside Quick Links */
+.footer-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.footer-nav-link {
+  text-decoration: none;
+  color: rgb(37, 39, 37);
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-nav-link:hover {
+  color: green;
+}
+
+/* Social media links */
+.footer-social-links {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-social-link {
+  text-decoration: none;
+  color: rgb(22, 30, 24);
+  font-weight: bold;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-social-link:hover {
+  color: darkgreen;
+}
+
+/* Bottom bar */
+.footer-bottom-bar {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+  border-top: 1px solid #ccc;
+  padding-top: 15px;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .footer-container {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .footer-section {
+    width: 100%;
+  }
+
+  .footer-social-links {
+    flex-direction: row;
+    gap: 15px;
+  }
+}
+
 </style>
 
 <body>
@@ -54,41 +267,169 @@
         <h1>Crop Recommendation System</h1>
     </header>
     <nav>
+      {% comment %} <div style={styles.logo}>
+          <span style={styles.nepaliText}> हाम्रो कृषि</span>
+        </div> {% endcomment %}
+        <a href="/shop/home/">CropSys</a>
         <a href="/shop/home/">Home</a>
         <a href="/shop/about/">About</a>
         <a href="/shop/service/">Services</a>
-        <a href="/shop/login/">Login</a>
-        <a href="/shop/signup/">Sign Up</a>
         <a href="/shop/contactus/">Contact Us</a>
+        <a href="/shop/login/">Log Out</a>
+
+        {%if user.is_authenticated%}
+        <span class="welcome-user">Welcome {{ request.user.username }}</span>
+         {%endif%}
+        
     </nav>
+
+
+{% comment %} body {% endcomment %}
+
+
+<div class="hero-container">
+    <div class="text-overlay">
+        <h4 class="subheading">Welcome to Hamro Krishi</h4>
+        <h1 class="heading">Our mission is to empower farmers with technology.</h1>
+    </div>
+</div>
+
+<h1> -------OUR SERVICES-------- </h1>
+    
+
+    <div class="container">
+        <div class="card">
+            <h2>Crop Recommendation</h2>
+            <p>Recommend best crop according to climate</p>
+           <a href="/shop/service/" class="btn-primary">Start Now &rarr;</a>
+
+        </div>
+        <div class="card">
+            <h2>Hamro Market</h2>
+            <p>Provides best market services</p>
+            <br>
+            <a href="" class="btn-primary">Start Now &rarr;</a>
+
+        </div>
+        <div class="card">
+            <h2>Fertilizer recommendation</h2>
+            <p>Recommend best fertilizer as per soil conditions</p>
+           <a href="" class="btn-primary">Start Now &rarr;</a>
+        </div>
+        <div class="card">
+            <h2>Farmar-Expert Consultation</h2>
+            <p>Acts as intermediate to connect with experts</p>
+             <a href="" class="btn-primary">Start Now &rarr;</a>
+        </div>
+{% comment %}         
+        <div class="card">
+            <h2>SEO</h2>
+            <p>Personalized SEO Solutions to Boost Search Engine Rankings</p>
+        </div>
+        <div class="card">
+            <h2>Social Media Marketing</h2>
+            <p>Establish a Powerful Online Presence and Connect with Your Audience</p>
+        </div>
+        <div class="card">
+            <h2>Graphic Design</h2>
+            <p>Designs that Speak Your Brand’s Narrative and Connect with Your Audience</p>
+        </div>
+        <div class="card">
+            <h2>Content Writing</h2>
+            <p>Thoughtful Content Designed to Engage Your Audience</p>
+        </div>
+    </div>
+
+*// {% endcomment %}
+
+
     {% if messages %}
-    <ul style="list-style:none; padding:0;">
-        {% for message in messages %}
-        <li style="padding: 10px; margin-bottom: 10px; 
-                 border-radius: 5px;
-                 color: white;
-                 background-color: 
-                   {% if message.tags == 'success' %}green
-                   {% elif message.tags == 'error' %}red
-                   {% else %}gray
-                   {% endif %};">
-            {{ message }}
-        </li>
-        {% endfor %}
-    </ul>
-    {% endif %}
-    <div class="welcome-container">
+<div style="display: flex; justify-content: center; margin-bottom:3px; margin-top: 3px;">
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    {% for message in messages %}
+      <li id="flash-message" style="
+        padding: 12px 25px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        font-weight: 500;
+        color: white;
+        text-align: center;
+        background-color:
+          {% if message.tags == 'success' %}#4caf50
+          {% elif message.tags == 'error' %}#f44336
+          {% else %}#607d8b
+          {% endif %};
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        min-width: 300px;
+      ">
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+  setTimeout(function() {
+    var flash = document.getElementById('flash-message');
+    if (flash) {
+      flash.style.display = 'none';
+    }
+  }, 3000); // 5 seconds
+</script>
+{% endif %}
+
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Contact Section -->
+    <div class="footer-section">
+      <h3 class="footer-title">Contact Us</h3>
+      <p class="footer-text">Email: yureshkogmail@xaina.com</p>
+      <p class="footer-text">Phone: +977-1-1234567</p>
+      <p class="footer-text">Address: Kathmandu, Nepal</p>
+    </div>
+
+    <!-- Quick Links Section -->
+    <div class="footer-section">
+      <h3 class="footer-title">Quick Links</h3>
+        <a href="#about" class="footer-nav-link">About Us</a> <br>
+        <a href="#solution" class="footer-nav-link">Our Services</a><br>
+        <a href="#program" class="footer-nav-link">Contact Us</a>
+    </div>
+
+    <!-- Social Media Section -->
+    <div class="footer-section">
+      <h3 class="footer-title"> Follow Us</h3>
+      <div class="footer-social-links">
+        <a href="https://facebook.com" target="_blank" class="footer-social-link">Facebook</a>
+        <a href="https://twitter.com" target="_blank" class="footer-social-link">Twitter</a>
+        <a href="https://instagram.com" target="_blank" class="footer-social-link">Instagram</a>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Footer Bottom Bar -->
+  <div class="footer-bottom-bar">
+    © <script>document.write(new Date().getFullYear())</script> Crop AI. All rights reserved.
+    <a href="/shop/terms/" style="color: green;">Terms & Privacy</a>
+  </div>
+</footer>
+
+    {% comment %} <div class="welcome-container">
         
         <p>We help farmers find the best crops for their soil using AI and data.</p>
-        <p>Login or Sign Up to get personalized crop recommendations.</p>
-    </div>
-        <p>Get accurate crop recommendations tailored to your field and climate.</p>
-        <a href="/shop/service/" class="btn-primary">Start Now</a>
+        <p>Login or Sign Up to get personalized crop recommendations.</p> {% endcomment %}
     
-        <footer>
+
+
+
+
+ 
+        {% comment %} <footer>
             &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
                 Privacy</a>
-        </footer>
+        </footer> {% endcomment %}
 </body>
 
 </html> 

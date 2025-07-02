@@ -1,0 +1,118 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Footer</title>
+</head>
+<style> 
+/* /static/css/footer.css */
+
+.footer {
+  background-color: rgb(225, 243, 225);
+  padding: 40px 30px 20px 30px;
+  font-family: Arial, sans-serif;
+  color: #333;
+}
+
+.footer-container {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+
+.footer-section {
+  flex: 1 1 200px;
+  margin-bottom: 20px;
+}
+
+.footer-title {
+  font-size: 18px;
+  font-weight: bold;
+  margin-bottom: 15px;
+  color: #69391b;
+}
+
+.footer-text {
+  margin: 5px 0;
+  font-size: 14px;
+}
+
+.footer-nav-menu {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.footer-nav-link {
+  text-decoration: none;
+  color: #78943d;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.footer-social-links {
+  display: flex;
+  gap: 15px;
+}
+
+.footer-social-link {
+  text-decoration: none;
+  color: #88AA00;
+  font-weight: bold;
+  font-size: 14px;
+}
+
+.footer-bottom-bar {
+  margin-top: 20px;
+  text-align: center;
+  font-size: 13px;
+  color: #666;
+}
+
+
+
+
+
+
+</style>
+<body>
+  <footer class="footer">
+    <div class="footer-container">
+      <div class="footer-section">
+        <h3 class="footer-title">Contact Us</h3>
+        <p class="footer-text">Email: yureshkogmail@xaina.com</p>
+        <p class="footer-text">Phone: +977-1-1234567</p>
+        <p class="footer-text">Address: Kathmandu, Nepal</p>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Quick Links</h3>
+        <nav class="footer-nav-menu">
+          <a href="#about" class="footer-nav-link">About Us</a>
+          <a href="#solution" class="footer-nav-link">Our Solution</a>
+          <a href="#program" class="footer-nav-link">Flagship Program</a>
+          <a href="#blog" class="footer-nav-link">Blog</a>
+          <a href="#report" class="footer-nav-link">Report</a>
+          <a href="#advisors" class="footer-nav-link">Our Advisors</a>
+        </nav>
+      </div>
+
+      <div class="footer-section">
+        <h3 class="footer-title">Follow Us</h3>
+        <div class="footer-social-links">
+          <a href="https://facebook.com" target="_blank" class="footer-social-link">Facebook</a>
+          <a href="https://twitter.com" target="_blank" class="footer-social-link">Twitter</a>
+          <a href="https://instagram.com" target="_blank" class="footer-social-link">Instagram</a>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="footer-bottom-bar">
+      © <script>document.write(new Date().getFullYear())</script>  &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
+                Privacy</a>
+    </div>
+  </footer>
+</body>
+</html>
