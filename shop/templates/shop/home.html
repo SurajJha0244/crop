@@ -103,7 +103,7 @@ nav .welcome-user:hover {
    body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #f9f9f9;
-    padding: 20px;
+    padding: 0px;
     margin: 0;
 }
 
@@ -259,6 +259,70 @@ h1 {
     gap: 15px;
   }
 }
+ body {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        margin: 0;
+        padding: 0;
+        color: #000;
+    }
+
+    .team-section {
+        text-align: center;
+        padding: 50px 20px;
+    }
+
+    .team-section h2 {
+        font-size: 2rem;
+        color: #009717;
+        margin-bottom: 40px;
+    }
+
+    .team-container {
+        display: flex;
+        justify-content: center;
+        flex-wrap: wrap;
+        gap: 40px;
+    }
+
+    .team-card {
+        background: #fff;
+        border-radius: 30px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        width: 250px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+    }
+
+    .team-card:hover {
+        transform: translateY(-5px);
+    }
+
+    .team-card img {
+        width: 100%;
+        height: 250px;
+        object-fit: cover;
+        border-bottom: 2px solid #eee;
+        border-top-left-radius: 30px;
+        border-top-right-radius: 30px;
+    }
+
+    .info {
+        padding: 15px;
+        text-align: left;
+    }
+
+    .info h3 {
+        margin: 0;
+        font-size: 1.1rem;
+        color: #339aff;
+    }
+
+    .info p {
+        margin: 5px 0 0;
+        font-weight: bold;
+        color: #000;
+    }
 
 </style>
 
@@ -284,7 +348,41 @@ h1 {
     </nav>
 
 
-{% comment %} body {% endcomment %}
+
+    {% if messages %}
+<div style="display: flex; justify-content: center; margin-bottom:3px; margin-top: 3px;">
+  <ul style="list-style: none; padding: 0; margin: 0;">
+    {% for message in messages %}
+      <li id="flash-message" style="
+        padding: 12px 25px;
+        margin-bottom: 8px;
+        border-radius: 6px;
+        font-weight: 500;
+        color: white;
+        text-align: center;
+        background-color:
+          {% if message.tags == 'success' %}#4caf50
+          {% elif message.tags == 'error' %}#f44336
+          {% else %}#607d8b
+          {% endif %};
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        min-width: 300px;
+      ">
+        {{ message }}
+      </li>
+    {% endfor %}
+  </ul>
+</div>
+
+<script>
+  setTimeout(function() {
+    var flash = document.getElementById('flash-message');
+    if (flash) {
+      flash.style.display = 'none';
+    }
+  }, 3000); 
+</script>
+{% endif %}
 
 
 <div class="hero-container">
@@ -321,62 +419,6 @@ h1 {
             <p>Acts as intermediate to connect with experts</p>
              <a href="" class="btn-primary">Start Now &rarr;</a>
         </div>
-{% comment %}         
-        <div class="card">
-            <h2>SEO</h2>
-            <p>Personalized SEO Solutions to Boost Search Engine Rankings</p>
-        </div>
-        <div class="card">
-            <h2>Social Media Marketing</h2>
-            <p>Establish a Powerful Online Presence and Connect with Your Audience</p>
-        </div>
-        <div class="card">
-            <h2>Graphic Design</h2>
-            <p>Designs that Speak Your Brand’s Narrative and Connect with Your Audience</p>
-        </div>
-        <div class="card">
-            <h2>Content Writing</h2>
-            <p>Thoughtful Content Designed to Engage Your Audience</p>
-        </div>
-    </div>
-
-*// {% endcomment %}
-
-
-    {% if messages %}
-<div style="display: flex; justify-content: center; margin-bottom:3px; margin-top: 3px;">
-  <ul style="list-style: none; padding: 0; margin: 0;">
-    {% for message in messages %}
-      <li id="flash-message" style="
-        padding: 12px 25px;
-        margin-bottom: 8px;
-        border-radius: 6px;
-        font-weight: 500;
-        color: white;
-        text-align: center;
-        background-color:
-          {% if message.tags == 'success' %}#4caf50
-          {% elif message.tags == 'error' %}#f44336
-          {% else %}#607d8b
-          {% endif %};
-        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-        min-width: 300px;
-      ">
-        {{ message }}
-      </li>
-    {% endfor %}
-  </ul>
-</div>
-
-<script>
-  setTimeout(function() {
-    var flash = document.getElementById('flash-message');
-    if (flash) {
-      flash.style.display = 'none';
-    }
-  }, 3000); // 5 seconds
-</script>
-{% endif %}
 
 <footer class="footer">
   <div class="footer-container">
@@ -389,15 +431,13 @@ h1 {
       <p class="footer-text">Address: Kathmandu, Nepal</p>
     </div>
 
-    <!-- Quick Links Section -->
     <div class="footer-section">
       <h3 class="footer-title">Quick Links</h3>
-        <a href="#about" class="footer-nav-link">About Us</a> <br>
-        <a href="#solution" class="footer-nav-link">Our Services</a><br>
-        <a href="#program" class="footer-nav-link">Contact Us</a>
+        <a href="/shop/about/" class="footer-nav-link">About Us</a> <br>
+        <a href="/shop/service/" class="footer-nav-link">Our Services</a><br>
+        <a href="/shop/contactus/" class="footer-nav-link">Contact Us</a>
     </div>
 
-    <!-- Social Media Section -->
     <div class="footer-section">
       <h3 class="footer-title"> Follow Us</h3>
       <div class="footer-social-links">
@@ -408,18 +448,52 @@ h1 {
     </div>
 
   </div>
+  
+    <section class="team-section">
+        <h2>Team Members</h2>
+        <div class="team-container">
 
-  <!-- Footer Bottom Bar -->
+            <div class="team-card">
+                <img src="{% static 'shop/agricl.png' %}" alt="hi" />
+                <div class="info">
+                    <h3>Aayush</h3>
+                    <p>Student</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="{% static 'shop/agricl.png' %}" alt="hi" />
+                <div class="info">
+                    <h3>Sandip</h3>
+                    <p>Student</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="{% static 'shop/agricl.png' %}" alt="hi" />
+                <div class="info">
+                    <h3>Suraj</h3>
+                    <p>Student</p>
+                </div>
+            </div>
+
+            <div class="team-card">
+                <img src="{% static 'shop/agricl.png' %}" alt="hi" />
+                <div class="info">
+                    <h3>Yuresh</h3>
+                    <p>Student</p>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
   <div class="footer-bottom-bar">
     © <script>document.write(new Date().getFullYear())</script> Crop AI. All rights reserved.
     <a href="/shop/terms/" style="color: green;">Terms & Privacy</a>
   </div>
 </footer>
 
-    {% comment %} <div class="welcome-container">
-        
-        <p>We help farmers find the best crops for their soil using AI and data.</p>
-        <p>Login or Sign Up to get personalized crop recommendations.</p> {% endcomment %}
     
 
 

@@ -110,7 +110,7 @@ def user_login(request):
         if user is not None:
             ln(request,user)
             messages.success(request,"Successfully Logged In. Welcome!!")
-            return redirect('/shop/home/')
+            return redirect('/shop/service/')
         else:
             messages.error(request,'Invalid Credentials. Please Enter Valid Credentials.')
             return redirect('/shop/login/')
@@ -145,7 +145,7 @@ def user_signup(request):
         myuser.save()
         
         messages.success(request,'your account has been logged in')
-        return redirect('shop:home')
+        return redirect('shop:service')
     else:
         return render(request, 'shop/signup.html')
           
