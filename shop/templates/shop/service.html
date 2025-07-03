@@ -8,9 +8,7 @@
     <link rel="stylesheet" href="/static/css/base.css">
 </head>
 <body>
-    <header>
-        <h1>Crop Recommendation System</h1>
-    </header>
+    
     <nav>
         <a href="/shop/home/">Home</a>
         <a href="/shop/about/">About</a>
@@ -82,7 +80,9 @@
         </div>
       </div>
 
- <button type="submit" id="submitBtn">Get Recommendation</button>
+        <div class="content-center">
+          <button type="submit" id="submitBtn">Get Recommendation</button>
+        </div>
 {% if crop %}
       <div id="result" class="result" style="display:none;">
         🌿 <strong>Recommended Crop:</strong> <span id="cropName"></span>
@@ -121,6 +121,9 @@ syncInputs('rainfall', 'rainfall_num');
         <h3>🌾 Recommended Crop: <strong>{{ crop }}</strong></h3>
     </div> 
 {% comment %} {% endif %} {% endcomment %}
+
+{%include 'shop/Footer.html'%}
+
 
 <style>
 
@@ -241,16 +244,80 @@ input[type="number"] {
   border: 1px solid #dc2626;
 }
 
+/* Button */
+    .button {
+      margin-top: 2rem;
+      background-color: #16a34a;
+      color: #fff;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: 8px;
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: block;
+      width: 100%;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
 
 
+  
 
-    
+    .content-center {
+      text-align: center;
+      margin: 10px;
+      border-radius: 10px;
+        color:rgb(4, 117, 30);
+
+    }
+
+
+  #submitBtn {
+  width: 200px;
+  height: 50px;
+  font-size: 16px;
+  border: none;
+  background-color: #28a745;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+    .content-center {
+      text-align: center;
+      /* center the button in its container */
+      margin-top: 20px;
+      color:rgb(4, 117, 30);
+    }
+
+    .result-box {
+      text-align: center;
+      /* center text inside the box */
+      margin: 20px auto;
+      /* center the box itself */
+      padding: 15px 25px;
+      width: fit-content;
+      /* shrink box to content */
+      background-color: #f0f8ff;
+      border: 2px solid #28a745;
+      border-radius: 10px;
+      font-size: 1.2rem;#submitBtn {
+      width: 200px;
+      /* fixed width */
+      height: 50px;
+      /* fixed height */
+      font-size: 16px;
+      /* controls text size */
+      border: none;
+      background-color: #28a745;
+      color: white;
+      border-radius: 8px;
+      cursor: pointer;
+    }
+
 
 </style>
-{%include 'shop/Footer.html'%}
-<footer>
-        &copy; 2025 Crop AI. All rights reserved. <a href="/shop/terms/" style="color:white">Terms &
-                Privacy</a>
-    </footer>
+
 {% endblock %}
 

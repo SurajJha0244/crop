@@ -12,12 +12,12 @@
 
 <style>
     .welcome-container {
-        background-color: #ffffff;
+        background-color:rgb(235, 228, 228);
         padding: 40px;
         margin: 5px auto;
-        width: 90%;
+        width: 100%;
         border-radius: 10px;
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 10px rgba(199, 250, 215, 0.1);
         font-family: Arial, sans-serif;
         text-align: center;
     }
@@ -26,12 +26,15 @@
         font-size: 16px;
         color: #333;
         margin-bottom: 10px;
+         
+
     }
 
     .welcome-container a {
-        color: #2e8b57;
+        color:rgb(168, 239, 199);
         font-weight: bold;
         text-decoration: none;
+        
     }
 
     .welcome-container a:hover {
@@ -45,7 +48,7 @@
     font-size: 1rem;
     margin:10px;
     margin-bottom:5px;
-    margin-up:5px;
+   margin-top: 5px;
     text-decoration: none;
 }
 nav .welcome-user {
@@ -87,19 +90,36 @@ nav .welcome-user:hover {
     color: white;
 }
 
-.subheading {
-    font-size: 30px;
-    letter-spacing: 3px;
-    margin: 0;
+.subheading, .heading {
+  animation-duration: 2s;
+  animation-iteration-count: infinite;
+  animation-timing-function: ease-in-out;
+  animation-direction: alternate;
 }
 
-.heading {
-    font-size: 50px;
-    font-weight: bold;
-    letter-spacing: 5px;
-    margin: 10px 0 0;
-    color:  rgba(3, 241, 63, 0.99)
+/* Subheading bounces */
+.subheading {
+  animation-name: bounceSub;
+  color:rgb(228, 232, 228);
 }
+
+/* Heading slides */
+.heading {
+  animation-name: slideHeading;
+color:rgb(228, 232, 228);
+}
+
+/* Keyframes */
+@keyframes bounceSub {
+  0%   { transform: translateY(0); opacity: 1; }
+  100% { transform: translateY(-10px); opacity: 0.8; }
+}
+
+@keyframes slideHeading {
+  0%   { transform: translateX(0); opacity: 1; }
+  100% { transform: translateX(20px); opacity: 0.8; }
+}
+
    body {
     font-family: 'Segoe UI', sans-serif;
     background-color: #f9f9f9;
@@ -118,22 +138,35 @@ h1 {
 
 .subtitle {
     text-align: center;
-    color: #777;
+    color: white;
     margin-bottom: 40px;
 }
 
 .container {
-    display: flex;
+    {% comment %} display: flex;
     flex-wrap: wrap;
     justify-content: center;
     gap: 20px;
+    height: 100%; {% endcomment %}
+     justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  background-color: #f0f8f0;
+  padding: 2rem;
+  min-height:auto;
+  box-sizing: border-box;
+   box-shadow: 0 4px 12px rgba(19, 140, 33, 0.1);
+
+
 }
 
 .card {
     background-color: #fff;
     border-radius: 10px;
     padding: 20px;
-    width: 260px;
+    width: 500px;
+    height: 200px;
     box-shadow: 0 2px 8px rgba(114, 250, 36, 0.1);
     text-align: center;
     transition: 0.3s;
@@ -145,13 +178,13 @@ h1 {
 }
 
 .card h2 {
-    font-size: 18px;
+    font-size: 30px;
     color: #222;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
 }
 
 .card p {
-    font-size: 14px;
+    font-size: 15px;
     color: #666;
 }
 {% comment %} footer {% endcomment %}
@@ -327,9 +360,7 @@ h1 {
 </style>
 
 <body>
-    <header>
-        <h1>Crop Recommendation System</h1>
-    </header>
+   
     <nav>
       {% comment %} <div style={styles.logo}>
           <span style={styles.nepaliText}> हाम्रो कृषि</span>
@@ -398,7 +429,10 @@ h1 {
     <div class="container">
         <div class="card">
             <h2>Crop Recommendation</h2>
-            <p>Recommend best crop according to climate</p>
+            <p>Recommend best crop according to climate</p>  <br>
+
+
+
            <a href="/shop/service/" class="btn-primary">Start Now &rarr;</a>
 
         </div>
@@ -406,49 +440,30 @@ h1 {
             <h2>Hamro Market</h2>
             <p>Provides best market services</p>
             <br>
+
+
+
             <a href="" class="btn-primary">Start Now &rarr;</a>
 
         </div>
         <div class="card">
             <h2>Fertilizer recommendation</h2>
             <p>Recommend best fertilizer as per soil conditions</p>
+
+
+          <br>
+
            <a href="" class="btn-primary">Start Now &rarr;</a>
         </div>
         <div class="card">
             <h2>Farmar-Expert Consultation</h2>
             <p>Acts as intermediate to connect with experts</p>
+          <br>
+
+
              <a href="" class="btn-primary">Start Now &rarr;</a>
         </div>
-
-<footer class="footer">
-  <div class="footer-container">
-    
-    <!-- Contact Section -->
-    <div class="footer-section">
-      <h3 class="footer-title">Contact Us</h3>
-      <p class="footer-text">Email: yureshkogmail@xaina.com</p>
-      <p class="footer-text">Phone: +977-1-1234567</p>
-      <p class="footer-text">Address: Kathmandu, Nepal</p>
     </div>
-
-    <div class="footer-section">
-      <h3 class="footer-title">Quick Links</h3>
-        <a href="/shop/about/" class="footer-nav-link">About Us</a> <br>
-        <a href="/shop/service/" class="footer-nav-link">Our Services</a><br>
-        <a href="/shop/contactus/" class="footer-nav-link">Contact Us</a>
-    </div>
-
-    <div class="footer-section">
-      <h3 class="footer-title"> Follow Us</h3>
-      <div class="footer-social-links">
-        <a href="https://facebook.com" target="_blank" class="footer-social-link">Facebook</a>
-        <a href="https://twitter.com" target="_blank" class="footer-social-link">Twitter</a>
-        <a href="https://instagram.com" target="_blank" class="footer-social-link">Instagram</a>
-      </div>
-    </div>
-
-  </div>
-  
     <section class="team-section">
         <h2>Team Members</h2>
         <div class="team-container">
@@ -488,6 +503,36 @@ h1 {
         </div>
     </section>
 
+<footer class="footer">
+  <div class="footer-container">
+    
+    <!-- Contact Section -->
+    <div class="footer-section">
+      <h3 class="footer-title">Contact Us</h3>
+      <p class="footer-text">Email: yureshkogmail@xaina.com</p>
+      <p class="footer-text">Phone: +977-1-1234567</p>
+      <p class="footer-text">Address: Kathmandu, Nepal</p>
+    </div>
+
+    <div class="footer-section">
+      <h3 class="footer-title">Quick Links</h3>
+        <a href="/shop/about/" class="footer-nav-link">About Us</a> <br>
+        <a href="/shop/service/" class="footer-nav-link">Our Services</a><br>
+        <a href="/shop/contactus/" class="footer-nav-link">Contact Us</a>
+    </div>
+
+    <div class="footer-section">
+      <h3 class="footer-title"> Follow Us</h3>
+      <div class="footer-social-links">
+        <a href="https://facebook.com" target="_blank" class="footer-social-link">Facebook</a>
+        <a href="https://twitter.com" target="_blank" class="footer-social-link">Twitter</a>
+        <a href="https://instagram.com" target="_blank" class="footer-social-link">Instagram</a>
+      </div>
+    </div>
+
+  </div>
+  
+    
   <div class="footer-bottom-bar">
     © <script>document.write(new Date().getFullYear())</script> Crop AI. All rights reserved.
     <a href="/shop/terms/" style="color: green;">Terms & Privacy</a>
