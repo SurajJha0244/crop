@@ -145,7 +145,7 @@ def user_signup(request):
         myuser.save()
         
         messages.success(request,'your account has been logged in')
-        return redirect('shop:service')
+        return redirect('shop:home')
     else:
         return render(request, 'shop/signup.html')
           
